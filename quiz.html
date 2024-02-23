@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>courses</title>
+     
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+     
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="css/style.css">
+     
+     </head>
+     <body>
+     
+     <header class="header">
+        
+        
+     
+     </header>   
+     
+     <div class="side-bar">
+     
+        <div id="close-btn">
+           <i class="fas fa-times"></i>
+        </div>
+     
+        <div class="profile">
+           <img src="images/pic-1.jpg" class="image" alt="">
+           <h3 class="name">Dhinakar SP</h3>
+           <p class="role">student</p>
+           <a href="profile.html" class="btn">view profile</a>
+        </div>
+     
+        <nav class="navbar">
+          <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+          <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+          <a href="fillandfocus.html"><i class="fas fa-chalkboard-user"></i><span>Fit tools</span></a>
+          <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+          
+       </nav>
+     
+     </div>
+     
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #b8c6db;
+        background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7f7 100%);
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+      }
+
+      .quiz-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+        width: 1000px;
+        overflow: hidden;
+      }
+
+      .quiz-header {
+        padding: 1rem;
+      }
+
+      h2 {
+        padding: 1rem;
+        text-align: center;
+        margin: 0;
+        font-size: 5rem;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      ul li {
+        font-size: 3.2rem;
+        margin: 5rem 0;
+      }
+
+      ul li label {
+        cursor: pointer;
+      }
+
+      button {
+        background-color: #03cae4;
+        color: #fff;
+        border: none;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        font-size: 4.5rem;
+        font-family: inherit;
+        padding: 1.3rem;
+      }
+
+      button:hover {
+        background-color: #04adc4;
+      }
+
+      button:focus {
+        outline: none;
+        background-color: #44b927;
+      }
+    </style>
+    <!-- Coding with nick -->
+    <title>Quiz Time</title>
+  </head>
+
+  <body>
+    <div class="quiz-container" id="quiz">
+      <div class="quiz-header">
+        <h2 id="question">Question Text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer" id="a" class="answer" />
+            <label for="a" id="a_text">Answer</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="b" class="answer" />
+            <label for="b" id="b_text">Answer</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="c" class="answer" />
+            <label for="c" id="c_text">Answer</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="d" class="answer" />
+            <label for="d" id="d_text">Answer</label>
+          </li>
+        </ul>
+      </div>
+
+      <button id="submit">Submit</button>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          question: "What does a panic attack resemble ?",
+          a: "A Heart attack",
+          b: "Uncontrollable breathing",
+          c: "Isolation",
+          d: "none of the above",
+          correct: "a",
+        },
+        {
+          question: "Which Micro-Nutrient is the most important ?",
+          a: "Vitamin A",
+          b: "Zinc",
+          c: "Folate",
+          d: "Iodine",
+          correct: "c",
+        },
+        {
+          question: "How many different types of Anxiety Disorders are there ?",
+          a: "6",
+          b: "11",
+          c: "8",
+          d: "9",
+          correct: "b",
+        },
+        {
+          question:
+            "In the hierarchy of endocrine dominance, which hormone stands out as being secreted in the highest quantity within the human body's intricate regulatory system?",
+          a: "Insulin",
+          b: "Cortisol",
+          c: "Prolactin",
+          d: "Growth Hormone",
+          correct: "a",
+        },
+        {
+          question: "What is self-esteem ?",
+          a: "Person’s overall sense of self-worth or personal value.",
+          b: "Does not play a part in your motivation and success throughout life",
+          c: "Not being able to see all your abilities & weaknesses together",
+          d: "All of the above",
+          correct: "a",
+        },
+        {
+          question: "What is the meaning of 'disease-free' ?",
+          a: "Having an absence of symptoms",
+          b: "Having a strong immune system",
+          c: "Absence of any infectious agents in the body",
+          d: "Maintaining a healthy lifestyle",
+          correct: "a",
+        },
+        {
+          question:
+            "Which Country has the most Olympic Gold medals and how many ?",
+          a: "United States , 2629",
+          b: "Russia , 1083",
+          c: "Germany , 2910",
+          d: "Australia , 3001",
+          correct: "a",
+        },
+        {
+          question: "What is mindfulness ?",
+          a: "Thoughts in our mind",
+          b: "Being in the present, being aware of our thoughts and feelings in the moment. Brings us back to the present.",
+          c: "Constantly thinking about past events and things in the future",
+          d: "Having your mind full of thoughts, feeling, emotions",
+          correct: "b",
+        },
+        {
+          question: "Which fruit is the best source of Potassium ?",
+          a: "Watermelon",
+          b: "Papaya",
+          c: "Banana",
+          d: "Avocado",
+          correct: "c",
+        },
+        {
+          question:
+            "Which sport demands the highest combination of physical body and mental toughness? ?",
+          a: "Marathon Running",
+          b: "Alpine Skiing",
+          c: "Chess",
+          d: "Boxing",
+          correct: "d",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+      const answerEls = document.querySelectorAll(".answer");
+      const questionEl = document.getElementById("question");
+      const a_text = document.getElementById("a_text");
+      const b_text = document.getElementById("b_text");
+      const c_text = document.getElementById("c_text");
+      const d_text = document.getElementById("d_text");
+      const submitBtn = document.getElementById("submit");
+
+      let currentQuiz = 0;
+      let score = 0;
+
+      loadQuiz();
+
+      function loadQuiz() {
+        deselectAnswers();
+
+        const currentQuizData = quizData[currentQuiz];
+
+        questionEl.innerText = currentQuizData.question;
+        a_text.innerText = currentQuizData.a;
+        b_text.innerText = currentQuizData.b;
+        c_text.innerText = currentQuizData.c;
+        d_text.innerText = currentQuizData.d;
+      }
+
+      function deselectAnswers() {
+        answerEls.forEach((answerEl) => (answerEl.checked = false));
+      }
+
+      function getSelected() {
+        let answer;
+        answerEls.forEach((answerEl) => {
+          if (answerEl.checked) {
+            answer = answerEl.id;
+          }
+        });
+        return answer;
+      }
+
+      submitBtn.addEventListener("click", () => {
+        const answer = getSelected();
+        if (answer) {
+          if (answer === quizData[currentQuiz].correct) {
+            score++;
+          }
+
+          currentQuiz++;
+
+          if (currentQuiz < quizData.length) {
+            loadQuiz();
+          } else {
+            quiz.innerHTML = `
+           <h2>You answered ${score}/${quizData.length} questions correctly</h2>
+
+           <button onclick="location.reload()">Reload</button>
+           `;
+          }
+        }
+      });
+    </script>
+    <!-- coding with nick -->
+  </body>
+  
+</html>

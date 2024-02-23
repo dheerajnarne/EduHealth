@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>courses</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo" style="margin-left:17%;"> Edu Health</a>
+
+
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">Dhinakar SP</h3>
+         <p class="role">student</p>
+         <a href="profile.html" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">login</a>
+            <a href="register.html" class="option-btn">register</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Dhinakar SP</h3>
+      <p class="role">student</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+    <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+    <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+    <a href="fillandfocus.html"><i class="fas fa-chalkboard-user"></i><span>Fit tools</span></a>
+    <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+   </nav>
+
+</div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 60%;
+        margin-left: 29%;
+        margin-top: 2%;
+        padding: 5%;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 300%;
+    }
+
+    form {
+        margin-bottom: 20px;
+        font-size: 200%;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 2%;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 100%;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745; /* Green color */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    button:hover {
+        background-color: #218838; /* Darker green color on hover */
+    }
+
+    .results {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 300%;
+    }
+
+    .results h2 {
+        margin-top: 0;
+        color: #333;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 300%;
+    }
+
+    .results p {
+        margin-bottom: 5px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Calorie Deficit Calculator</h1>
+    <form id="calorieForm">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required>
+
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" name="height" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="activity">Activity Level:</label>
+        <select id="activity" name="activity" required>
+            <option value="sedentary">Sedentary (little or no exercise)</option>
+            <option value="lightlyActive">Lightly Active (light exercise/sports 1-3 days/week)</option>
+            <option value="moderatelyActive">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+            <option value="veryActive">Very Active (hard exercise/sports 6-7 days a week)</option>
+            <option value="superActive">Super Active (very hard exercise & physical job or 2x training)</option>
+        </select>
+
+        <label for="goal">Goal:</label>
+        <select id="goal" name="goal" required>
+            <option value="lose">Lose Weight</option>
+            <option value="maintain">Maintain Weight</option>
+            <option value="gain">Gain Weight</option>
+        </select>
+
+        <button type="button" onclick="calculateCalories()">Calculate</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+<script>
+    function calculateCalories() {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const age = parseFloat(document.getElementById('age').value);
+        const gender = document.getElementById('gender').value;
+        const activityLevel = document.getElementById('activity').value;
+        const goal = document.getElementById('goal').value;
+
+        let bmr = 0;
+        if (gender === 'male') {
+            bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        } else if (gender === 'female') {
+            bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+        }
+
+        let tdee = 0;
+        switch (activityLevel) {
+            case 'sedentary':
+                tdee = bmr * 1.2;
+                break;
+            case 'lightlyActive':
+                tdee = bmr * 1.375;
+                break;
+            case 'moderatelyActive':
+                tdee = bmr * 1.55;
+                break;
+            case 'veryActive':
+                tdee = bmr * 1.725;
+                break;
+            case 'superActive':
+                tdee = bmr * 1.9;
+                break;
+            default:
+                break;
+        }
+
+        let calorieDeficit = 0;
+        switch (goal) {
+            case 'lose':
+                calorieDeficit = tdee - 500; // Aim for a 500 calorie deficit for weight loss
+                break;
+            case 'maintain':
+                calorieDeficit = tdee; // Maintain current weight
+                break;
+            case 'gain':
+                calorieDeficit = tdee + 500; // Aim for a 500 calorie surplus for weight gain
+                break;
+            default:
+                break;
+        }
+
+        displayResults(bmr, tdee, calorieDeficit);
+    }
+
+    function displayResults(bmr, tdee, calorieDeficit) {
+        const resultsElement = document.getElementById('results');
+        resultsElement.innerHTML = `
+            <h2 style="font-size:250%;">Results:</h2>
+            <div style="font-size:200%;">
+            <p><strong>BMR:</strong> ${bmr.toFixed(2)} calories/day</p>
+            <p><strong>TDEE:</strong> ${tdee.toFixed(2)} calories/day</p>
+            <p><strong>Calorie Deficit/Surplus:</strong> ${calorieDeficit.toFixed(2)} calories/day</p>
+            </div>
+        `;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>courses</title>
+     
+        <!-- font awesome cdn link  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+     
+        <!-- custom css file link  -->
+        <link rel="stylesheet" href="css/style.css">
+     
+     </head>
+     <body>
+<header class="header">
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Dhinakar SP</h3>
+      <p class="role">student</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+     <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+     <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+     <a href="fillandfocus.html"><i class="fas fa-chalkboard-user"></i><span>Fit tools</span></a>
+     <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+     
+  </nav>
+
+</div>
+
+<body>
+    <h1 style="font-size: 500%;margin-left: 30%;margin-bottom: 6%;"> Calorie Calculator</h1>
+    <form id="calorieForm">
+        <label for="food" style="font-size: 300%;">Select Food:</label>
+        <select id="food" name="food" style="font-size: 250%;margin-left: 1%;">
+            <option value="rice">Rice</option>
+            <option value="roti">Roti (Chapati)</option>
+            <option value="dal">Dal (Cooked Lentils)</option>
+            <option value="sabzi">Sabzi (Mixed Vegetables)</option>
+            <option value="chicken">Chicken Curry</option>
+            <option value="fish">Fish Curry</option>
+            <option value="paneer">Paneer (Indian Cottage Cheese)</option>
+            <option value="aloo-gobi">Aloo Gobi (Potato and Cauliflower Curry)</option>
+            <option value="chole">Chole (Chickpea Curry)</option>
+        </select>
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity in grams" step="100" min="100" style="font-size: 300%;margin-left: 1%;">
+        <button class="inline-btn" type="button" onclick="addFood()" style="font-size: 250%;background-color:#1b8544;margin-left: 1%    ;">Add Food</button>
+        
+        <br>
+        <ul id="foodList" style="font-size: 300%;margin-left: 10%;margin-top: 1%;margin-bottom: 2%;"></ul>
+        <button class="inline-btn" type="button" style="font-size: 250%;background-color:#1b8544;margin-left: 38%    ;" onclick=calculateCalories()>Calculate Calories</button>
+    </form>
+
+    <div id="totalCalories" style="font-size: 300%;margin-left: 10%;margin-bottom: 10%;margin-top: 3%;"></div>
+    <canvas style="margin-left: 7%;" id="consumedChart" width="400" height="400"></canvas>
+    <div id="consumedLegend"></div>
+
+    <div id="requiredCalories"></div>
+    <canvas style="margin-top: -28.5%;margin-left: 50%;position: absolute;" id="requiredChart" width="400" height="400"></canvas>
+    <div id="requiredLegend"></div>
+
+    <script>
+        let foods = [];
+        let quantities = [];
+
+        function addFood() {
+            let food = document.getElementById("food").value;
+            let quantity = parseInt(document.getElementById("quantity").value);
+
+            if (food !== "" && !isNaN(quantity) && quantity > 0) {
+                foods.push(food);
+                quantities.push(quantity);
+                document.getElementById("foodList").innerHTML += `<li>${quantity} grams of ${getFoodName(food)} added</li>`;
+            }
+        }
+
+        function calculateCalories() {
+            let totalCalories = 0;
+
+            for (let i = 0; i < foods.length; i++) {
+                let caloriePer100g = getCaloriesPer100g(foods[i]);
+                totalCalories += (caloriePer100g / 100) * quantities[i];
+            }
+
+            document.getElementById("totalCalories").innerText = "Total Calories Consumed: " + totalCalories.toFixed(2);
+
+            let consumedMacronutrients = calculateMacronutrients();
+            let requiredMacronutrients = calculateRequiredMacronutrients(totalCalories);
+
+            drawPieChart("consumedChart", consumedMacronutrients, "Consumed Macronutrients");
+            drawLegend("consumedLegend", consumedMacronutrients);
+
+            drawPieChart("requiredChart", requiredMacronutrients, "Required Macronutrients");
+            drawLegend("requiredLegend", requiredMacronutrients);
+        }
+
+        function calculateMacronutrients() {
+            let fatCalories = 0;
+            let proteinCalories = 0;
+            let carbCalories = 0;
+
+            for (let i = 0; i < foods.length; i++) {
+                let caloriePer100g = getCaloriesPer100g(foods[i]);
+                let quantityInGrams = quantities[i];
+
+                let fatPercent = getMacronutrientPercentages(foods[i]).fat;
+                let proteinPercent = getMacronutrientPercentages(foods[i]).protein;
+                let carbPercent = 100 - fatPercent - proteinPercent;
+
+                fatCalories += (caloriePer100g / 100) * quantityInGrams * (fatPercent / 100);
+                proteinCalories += (caloriePer100g / 100) * quantityInGrams * (proteinPercent / 100);
+                carbCalories += (caloriePer100g / 100) * quantityInGrams * (carbPercent / 100);
+            }
+
+            return {
+                fat: fatCalories.toFixed(2),
+                protein: proteinCalories.toFixed(2),
+                carbohydrate: carbCalories.toFixed(2)
+            };
+        }
+
+        function calculateRequiredMacronutrients(totalCalories) {
+            let fatPercent = 0.25;
+            let proteinPercent = 0.25;
+            let carbPercent = 1 - fatPercent - proteinPercent;
+
+            let fatCalories = totalCalories * fatPercent;
+            let proteinCalories = totalCalories * proteinPercent;
+            let carbCalories = totalCalories * carbPercent;
+
+            return {
+                fat: fatCalories.toFixed(2),
+                protein: proteinCalories.toFixed(2),
+                carbohydrate: carbCalories.toFixed(2)
+            };
+        }
+
+        function drawPieChart(canvasId, macronutrients, title) {
+            let canvas = document.getElementById(canvasId);
+            let ctx = canvas.getContext('2d');
+            let centerX = canvas.width / 2;
+            let centerY = canvas.height / 2;
+            let radius = Math.min(centerX, centerY) - 10;
+
+            let total = parseFloat(macronutrients.fat) + parseFloat(macronutrients.protein) + parseFloat(macronutrients.carbohydrate);
+
+            let startAngle = 0;
+            let endAngle = 0;
+
+            // Fat
+            ctx.fillStyle = 'rgb(255, 99, 132)';
+            endAngle = startAngle + (Math.PI * 2 * (parseFloat(macronutrients.fat) / total));
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fill();
+            startAngle = endAngle;
+
+            // Protein
+            ctx.fillStyle = 'rgb(54, 162, 235)';
+            endAngle = startAngle + (Math.PI * 2 * (parseFloat(macronutrients.protein) / total));
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fill();
+            startAngle = endAngle;
+
+            // Carbohydrate
+            ctx.fillStyle = 'rgb(255, 205, 86)';
+            endAngle = startAngle + (Math.PI * 2 * (parseFloat(macronutrients.carbohydrate) / total));
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fill();
+
+            // Title
+            ctx.fillStyle = 'black';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(title, centerX, 20);
+        }
+
+        function drawLegend(legendId, macronutrients) {
+            let legend = document.getElementById(legendId);
+            legend.innerHTML = `<div ><span style="color: rgb(255, 99, 132);margin-left:10%">Fat:</span> ${macronutrients.fat} cal</div>`;
+            legend.innerHTML += `<div><span style="color: rgb(54, 162, 235);">Protein:</span> ${macronutrients.protein} cal</div>`;
+            legend.innerHTML += `<div><span style="color: rgb(255, 205, 86);">Carbohydrate:</span> ${macronutrients.carbohydrate} cal</div>`;
+        }
+
+        function getCaloriesPer100g(food) {
+            switch (food) {
+                case "rice":
+                    return 130;
+                case "roti":
+                    return 297;
+                case "dal":
+                    return 116;
+                case "sabzi":
+                    return 56;
+                case "chicken":
+                    return 197;
+                case "fish":
+                    return 160;
+                case "paneer":
+                    return 265;
+                case "aloo-gobi":
+                    return 95;
+                case "chole":
+                    return 138;
+                default:
+                    return 0;
+            }
+        }
+
+        function getFoodName(food) {
+            switch (food) {
+                case "rice":
+                    return "Rice";
+                case "roti":
+                    return "Roti (Chapati)";
+                case "dal":
+                    return "Dal (Cooked Lentils)";
+                case "sabzi":
+                    return "Sabzi (Mixed Vegetables)";
+                case "chicken":
+                    return "Chicken Curry";
+                case "fish":
+                    return "Fish Curry";
+                case "paneer":
+                    return "Paneer (Indian Cottage Cheese)";
+                case "aloo-gobi":
+                    return "Aloo Gobi (Potato and Cauliflower Curry)";
+                case "chole":
+                    return "Chole (Chickpea Curry)";
+                default:
+                    return "";
+            }
+        }
+
+        function getMacronutrientPercentages(food) {
+            switch (food) {
+                case "rice":
+                    return { fat: 0.3, protein: 6.8 };
+                case "roti":
+                    return { fat: 2.5, protein: 7.3 };
+                case "dal":
+                    return { fat: 4.5, protein: 7.2 };
+                case "sabzi":
+                    return { fat: 0.3, protein: 2.6 };
+                case "chicken":
+                    return { fat: 8.1, protein: 19.4 };
+                case "fish":
+                    return { fat: 9.3, protein: 17.6 };
+                case "paneer":
+                    return { fat: 20.8, protein: 18.3 };
+                case "aloo-gobi":
+                    return { fat: 3.3, protein: 2.9 };
+                case "chole":
+                    return { fat: 5.4, protein: 8.9 };
+                default:
+                    return { fat: 0, protein: 0 };
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
